@@ -1,7 +1,7 @@
-Logit is an easy to use Logging Wrapper for Commandline Applications
------------------------
+Logit
+-------
 
-Built using Python 3.4.3, should be compatible with other Python 3 releases.
+Logit is an easy to use logging wrapper for command line applications.  Built using Python 3.4.3, should be compatible with other Python 3 releases, but not yet tested with.
 
 ## Execute Logit
 
@@ -16,7 +16,6 @@ The default log path ~/logit.log is used if logit is called without any argument
 
 ## Read Log
 cat ~/logit.log
-
 
 
 
