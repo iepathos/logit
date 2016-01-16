@@ -33,7 +33,7 @@ class Logit(object):
         execution_str = "Executing '%s'" % self.cmd
         print(execution_str)
         output = check_output(self.cmd_array).decode("utf-8")
-        print("Saving updates to log %s" % self.log_filename)
+        print("Saving output to log %s" % self.log_filename)
         self.log(str(datetime.utcnow()) +
                  " - " + execution_str +
                  "\n" + output)
