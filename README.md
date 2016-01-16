@@ -14,8 +14,9 @@ The default log path ~/logit.log is used if logit is called without any argument
 python3 logit.py "curl -ks https://bitpay.com/api/rates | python -m json.tool"
 
 
-## Read Log
-cat ~/logit.log
+## Comands
++ Specify log filename "--log" or "-l"
++ Silence logit feedback output "--silent" or "-s"
 
 
 
