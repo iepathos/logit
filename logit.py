@@ -10,10 +10,11 @@ log_filename = os.path.expanduser('~/logit.log')
 
 class Logit(object):
 
-    def __init__(self, cmd, log_filename=log_filename):
+    def __init__(self, cmd, log_filename=log_filename, silent=False):
         self.log_filename = log_filename
         self.cmd = cmd
         self.cmd_array = cmd.split(" ")
+        self.silent = silent
 
     def check_log(self, func, text):
         if os.path.dirname(self.log_filename) != "":
@@ -29,9 +30,11 @@ class Logit(object):
 
     def execute_command(self):
         execution_str = "Executing '%s'" % self.cmd
-        print(execution_str)
+        if not SILENT:
+            print(execution_str)
         output = check_output(self.cmd_array).decode("utf-8")
-        print("Saving output to log %s" % self.log_filename)
+        if not SILENT:
+            print("Saving output to log %s" % self.log_filename)
         self.log(str(datetime.utcnow()) +
                  " - " + execution_str +
                  "\n" + output)
@@ -43,11 +46,16 @@ if __name__ == '__main__':
         )
     parser.add_argument("cmd")
     parser.add_argument("--log", "-l")
+    parser.add_argument("--silent", "-s", action='store_true')
 
     args = parser.parse_args()
+    SILENT = False
+    if args.silent:
+        SILENT = True
+
     if args.log:
-        logit = Logit(args.cmd, os.path.expanduser(args.log))
+        logit = Logit(args.cmd, os.path.expanduser(args.log), SILENT)
         logit.execute_command()
     else:
-        logit = Logit(args.cmd, log_filename)
+        logit = Logit(args.cmd, log_filename, SILENT)
         logit.execute_command()
