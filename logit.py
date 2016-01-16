@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
 import argparse
@@ -16,10 +16,8 @@ class Logit(object):
         self.cmd_array = cmd.split(" ")
 
     def check_log(self, func, text):
-        try:
+        if os.path.dirname(self.log_filename) != "":
             os.makedirs(os.path.dirname(self.log_filename), exist_ok=True)
-        except:
-            pass
         func(self.log_filename, text)
 
     def add_to_log(self, file_handle, text):
