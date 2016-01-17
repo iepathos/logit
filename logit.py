@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 import os
 import argparse
-import subprocess
-
 from datetime import datetime
 from subprocess import Popen, PIPE
 
