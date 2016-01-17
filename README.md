@@ -1,7 +1,7 @@
 Logit
 -------
 
-Logit is an easy to use logging wrapper for command line applications.  Logit executes the command passed to it and writes a timestamp, the command executed and its output to a log file.  Logit is useful when you require dead simple timestamp logging added over the output from a command line application. Built using Python 3.4.3, should be compatible with other Python 3 releases, but not yet tested with.
+Logit is an easy to use logging wrapper for command line applications.  Logit executes the command passed to it and writes a timestamp, the command executed and its output to a log file.  Logit is useful when you require dead simple timestamp logging added over the output from a command line application. Built using Python 3.4.3, should be compatible with earlier Python 3 releases, definitely compatible wth Python 3.5.1 as well.
 
 ## Execute Logit
 
