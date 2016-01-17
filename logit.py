@@ -17,18 +17,23 @@ class Logit(object):
         self.silent = silent
 
     def check_log(self, func, text):
+        """Makes sure the given log file exists, creates it if not and
+        then executes the passed logging function with the passed text."""
         if os.path.dirname(self.log_filename) != "":
             os.makedirs(os.path.dirname(self.log_filename), exist_ok=True)
         func(self.log_filename, text)
 
     def add_to_log(self, file_handle, text):
+        """Writes the passed text to the given file path."""
         with open(file_handle, "a") as f:
             f.write(str(text))
 
     def log(self, text):
+        """Checks that the file exists and logs the given text to that file"""
         self.check_log(self.add_to_log, text)
 
     def execute_command(self):
+        """Executes the given shell command and logs its output."""
         execution_str = "Executing '%s'" % self.cmd
         if not SILENT:
             print(execution_str)
