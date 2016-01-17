@@ -42,4 +42,10 @@ test
 ````
 
 
+## Add symlink to bin for easier use
+
+````shell
+ln -s path/to/logit.py /usr/local/bin/logit
+````
+
 Logit is Open Sourced under an MIT License.

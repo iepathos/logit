@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 import os
 import argparse
-from subprocess import check_output
+import subprocess
+
 from datetime import datetime
+from subprocess import Popen, PIPE
+
 
 log_filename = os.path.expanduser('~/logit.log')
 
@@ -16,33 +19,27 @@ class Logit(object):
         self.cmd_array = cmd.split(" ")
         self.silent = silent
 
-    def check_log(self, func, text):
-        """Makes sure the given log file exists, creates it if not and
-        then executes the passed logging function with the passed text."""
-        if os.path.dirname(self.log_filename) != "":
-            os.makedirs(os.path.dirname(self.log_filename), exist_ok=True)
-        func(self.log_filename, text)
+    def create_file_if_not_found(self, filename):
+        if os.path.dirname(filename) != "":
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-    def add_to_log(self, file_handle, text):
-        """Writes the passed text to the given file path."""
-        with open(file_handle, "a") as f:
-            f.write(str(text))
-
-    def log(self, text):
-        """Checks that the file exists and logs the given text to that file"""
-        self.check_log(self.add_to_log, text)
-
-    def execute_command(self):
-        """Executes the given shell command and logs its output."""
+    def stream_command(self):
         execution_str = "Executing '%s'" % self.cmd
         if not SILENT:
             print(execution_str)
-        output = check_output(self.cmd_array).decode("utf-8")
-        if not SILENT:
-            print("Saving output to log %s" % self.log_filename)
-        self.log(str(datetime.utcnow()) +
-                 " - " + execution_str +
-                 "\n" + output)
+        self.create_file_if_not_found(self.log_filename)
+        with open(self.log_filename, 'a') as f:
+            if not SILENT:
+                print("Saving output to %s" % self.log_filename)
+            f.write(execution_str +
+                    " - " +
+                    str(datetime.utcnow()) + '\n')
+            with Popen(self.cmd_array,
+                       stdout=PIPE,
+                       bufsize=1,
+                       universal_newlines=True) as p:
+                for line in p.stdout:
+                    f.write(line)
 
 
 if __name__ == '__main__':
@@ -60,7 +57,7 @@ if __name__ == '__main__':
 
     if args.log:
         logit = Logit(args.cmd, os.path.expanduser(args.log), SILENT)
-        logit.execute_command()
+        logit.stream_command()
     else:
         logit = Logit(args.cmd, log_filename, SILENT)
-        logit.execute_command()
+        logit.stream_command()
