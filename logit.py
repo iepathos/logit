@@ -42,7 +42,7 @@ class Logit(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-            description='Logit - An easy to use logging wrapper for commandline applications'
+            description='Logit - An easy to use logging wrapper for command line applications'
         )
     parser.add_argument("cmd")
     parser.add_argument("--log", "-l")
