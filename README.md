@@ -5,14 +5,16 @@ Logit is an easy to use logging wrapper for command line applications.  Logit ex
 
 ## Execute Logit
 
+````shell
 python3 logit.py "echo test" -l /custom/log/path.log
 cat /custom/log/path.log
-
+````
 
 The default log path ~/logit.log is used if logit is called without any argument.
 
+````shell
 python3 logit.py "curl -ks https://bitpay.com/api/rates | python -m json.tool"
-
+````
 
 ## Comands
 + Specify log filename "--log" or "-l"
@@ -34,7 +36,7 @@ test
 
 ## Crontab
 
-````
+````shell
 0 6 * * * python3 logit.py "brew cask update" -l brewupdates.log
 
 ````
