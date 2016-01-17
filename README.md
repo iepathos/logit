@@ -45,7 +45,12 @@ test
 ## Add symlink to bin for easier use
 
 ````shell
+# os x
 ln -s path/to/logit.py /usr/local/bin/logit
+logit 'brew cask update'
+
+# debian-based
+sudo logit 'apt-get update'
 ````
 
 Logit is Open Sourced under an MIT License.
