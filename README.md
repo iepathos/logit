@@ -38,3 +38,6 @@ test
 0 6 * * * python3 logit.py "brew cask update" -l brewupdates.log
 
 ````
+
+
+Logit is Open Sourced under an MIT License.
